@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<!--Set Background-->
+<style>
+body {
+  background-color: lightblue;
+  text-align:center;
+}
+</style>
+
+<body>
+
+<!--Title-->
+<h2>Predict Expenses of Insurance</h2>
+
+<!--Set Input-->
+<form action="{{ url_for('predict')}}" method="post">
+  <label for="age">Age:</label><br>
+  <input type="text" id="age" name="age" required="required"><br>
+  
+  <label for="sex">Sex:</label><br>
+  <input type="text" id="sex" name="sex" placeholder="male or female" required="required"><br>
+  
+  <label for="bmi">Bmi:</label><br>
+  <input type="text" id="bmi" name="bmi" required="required"><br>
+  
+  <label for="children">Children:</label><br>
+  <input type="text" id="children" name="children" required="required"><br>
+  
+  <label for="smoker">Smoker:</label><br>
+  <input type="text" id="smoker" name="smoker" placeholder="yes or no" required="required"><br>
+  
+  <label for="region">Region:</label><br>
+  <input type="text" id="region" name="region" placeholder="southwest or northwest" required="required"><br>
+  
+  <br><br>
+  <input type="submit" value="Predict expenses of insurance">
+</form> 
+
+<br><br>
+{{prediction_text}}
+
+</body>
+</html>
