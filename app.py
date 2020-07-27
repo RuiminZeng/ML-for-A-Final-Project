@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 import joblib
 import numpy as np
+import pandas as pd
 
 app = Flask(__name__)
 pipeline = joblib.load("insurance_prediction.joblib")
@@ -23,6 +24,8 @@ def predict():
   
   #Predict then return the calculation to browser
   X = np.array([age, sex, bmi, children, smoker, region])
+  X = np.atleast_2d(X)
+  X = pd.DataFrame(data=X, index=np.arange(len(X)), columns=['age', 'sex', 'bmi', 'children', 'smoker', 'region'])
   prediction = pipeline.predict(X)
   return render_template('template.html', prediction_text='Expense of insurance should be $ {}'.format(prediction))
 
