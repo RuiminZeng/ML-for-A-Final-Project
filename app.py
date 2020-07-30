@@ -7,12 +7,12 @@ app = Flask(__name__)
 pipeline = joblib.load("insurance_prediction.joblib")
 
 #Use my own html to build homepage
-@app.route('/')
+@app.route("/")
 def home():
-  return render_template('template.html')
+  return render_template("template.html")
 
 #Read input from browser and return the calculation to browser
-@app.route('/predict',methods=['POST'])
+@app.route("/predict",methods=["POST"])
 def predict():
   #Read input from browser
   age = request.form["age"]
@@ -25,11 +25,11 @@ def predict():
   #Predict then return the calculation to browser
   X = np.array([age, sex, bmi, children, smoker, region])
   X = np.atleast_2d(X)
-  X = pd.DataFrame(data=X, index=np.arange(len(X)), columns=['age', 'sex', 'bmi', 'children', 'smoker', 'region'])
+  X = pd.DataFrame(data=X, index=np.arange(len(X)), columns=["age", "sex", "bmi", "children", "smoker", "region"])
   prediction = pipeline.predict(X)
-  return render_template('template.html', prediction_text='Expense of insurance should be $ {}'.format(prediction))
+  return render_template("template.html", prediction_text="Expense of insurance should be $ {}".format(prediction))
 
 
 if __name__ == "__main__":
-  app.run(host='0.0.0.0', port=8080, debug=True)
+  app.run(host="0.0.0.0", port=8080, debug=True)
   
