@@ -29,15 +29,6 @@ def predict():
   prediction = pipeline.predict(X)
   return render_template("template.html", prediction_text="Expense of insurance should be $ {}".format(prediction))
 
-@app.route("/result",methods=["POST"])
-def result():
-  data = request.get_json(force=True)
-  X = np.array(data.values())
-  X = np.atleast_2d(X)
-  X = pd.DataFrame(data=X, index=np.arange(len(X)), columns=["age", "sex", "bmi", "children", "smoker", "region"])
-  prediction = pipeline.predict(X)
-  return jsonify(prediction)
-
 if __name__ == "__main__":
   app.run(host="0.0.0.0", port=8080, debug=True)
   
